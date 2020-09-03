@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Layouts_app.Light">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame  x:Name="red" BackgroundColor="#aaaaaa" Padding="80" 
+                   CornerRadius="90" 
+                   Margin="80,0">
+                <Label 
+                       Text="Punane"
+                       FontSize="Large"
+                
+                    />
+                
+            </Frame>
+            <Frame x:Name="yell" BackgroundColor="#aaaaaa" Padding="80" 
+                   CornerRadius="90" 
+                   Margin="80,0">
+                <Label
+                       Text="Yellow"
+                       FontSize="Large"
+                
+                    />
+
+            </Frame>
+            <Frame x:Name="green" BackgroundColor="#aaaaaa" Padding="80" 
+                   CornerRadius="90" 
+                   Margin="80,0">
+                <Label 
+                       Text="Green"
+                       FontSize="Large"
+                
+                    />
+
+            </Frame>
+            <StackLayout Orientation="Horizontal">
+            <Button
+                x:Name="btn" 
+                    Text="ON" 
+                    BackgroundColor="#6BFF50"
+                    BorderColor="Black"
+                    BorderWidth="7"
+                    FontSize="Large"
+                    Clicked ="btn_Clicked"
+                    VerticalOptions="EndAndExpand">
+            </Button>
+                <Button
+                x:Name="btn2" 
+                    Text="OFF" 
+                    BackgroundColor="Red"
+                    BorderColor="Black"
+                    BorderWidth="7"
+                    FontSize="Large"
+                    Clicked = "btn2_Clicked"
+                    VerticalOptions="EndAndExpand">
+                </Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
