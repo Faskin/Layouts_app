@@ -18,7 +18,7 @@ namespace Layouts_app
             Label punane = new Label()
             {
                 Text = "punane",
-                TextColor = Color.Red,
+                TextColor = Color.Black,
                 FontSize=30,
                 FontAttributes=FontAttributes.Bold,
                              
@@ -28,15 +28,16 @@ namespace Layouts_app
                 BackgroundColor = Color.Red,
                 Content = punane,
                 CornerRadius = 90,
-                Margin = new Thickness(10,80,80,0)
-                
+                Margin = new Thickness(145, 0, 145, 0),
+
+
 
             };
             Label kollane = new Label()
             {
                 Text = "kollane",
-                TextColor = Color.Yellow,
-                FontSize = 90,
+                TextColor = Color.Black,
+                FontSize = 30,
                 FontAttributes = FontAttributes.Bold
             };
             Frame koll = new Frame()
@@ -44,15 +45,16 @@ namespace Layouts_app
                 BackgroundColor = Color.Yellow,
                 Content = kollane,
                 CornerRadius = 90,
-                Margin = new Thickness(70, 20, 80, 0)
+                Margin = new Thickness(145, 0, 145, 0),
+
 
 
             };
             Label roheline = new Label()
             {
                 Text = "roheline",
-                TextColor = Color.Green,
-                FontSize = 90,
+                TextColor = Color.Black,
+                FontSize = 30,
                 FontAttributes = FontAttributes.Bold
 
             };
@@ -61,7 +63,10 @@ namespace Layouts_app
                 BackgroundColor = Color.Green,
                 Content = roheline,
                 CornerRadius = 90,
-                Margin = new Thickness(60, 0, 80, 0)
+                Margin = new Thickness(145, 0, 145, 0),
+
+
+
 
 
             };
@@ -72,7 +77,7 @@ namespace Layouts_app
                 BackgroundColor = Color.Green,
                 FontSize = 20,
                 FontAttributes = FontAttributes.Bold,
-                //Margin = new Thickness(40, 0,80,0)
+                
                 HorizontalOptions = LayoutOptions.Center
 
 
@@ -81,9 +86,9 @@ namespace Layouts_app
 
             StackLayout stackLayout = new StackLayout()
             {
-                Children = { pun, koll, roh, }
+                Children = { pun, koll, roh, btn, }
             };
-            stackLayout.Orientation = StackOrientation.Horizontal;
+            stackLayout.Orientation = StackOrientation.Vertical;
             Content = stackLayout;
         }
     }
