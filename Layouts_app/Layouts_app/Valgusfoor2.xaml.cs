@@ -154,24 +154,35 @@ namespace Layouts_app
             
         
 
-        private void Tap_Tapped(object sender, EventArgs e)
+        private async void Tap_Tapped(object sender, EventArgs e)
         {
             Frame fr = sender as Frame;
-            if (fr == pun)
+
+            if (sisse_valja == false)
             {
-                punane.Text = "seitsa ja oota!!";
+                await DisplayAlert("Hoiatus", "Сначала включи светофор", "OK");
+            }
+            else
+            {
+                if (fr == pun)
+                {
+                    punane.Text = "seitsa ja oota!!";
+
+                }
+                if (fr == koll)
+                {
+                    kollane.Text = "Untren";
+
+                }
+                if (fr == roh)
+                {
+                    roheline.Text = "Go";
+
+                }
 
             }
-            if (fr == koll)
-            {
-                kollane.Text = "Untren";
 
-            }
-            if (fr == roh)
-            {
-                roheline.Text = "Go";
 
-            }
 
         }
 
