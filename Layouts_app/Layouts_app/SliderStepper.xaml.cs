@@ -35,7 +35,7 @@ namespace Layouts_app
             {
                 Minimum = 0,
                 Maximum = 255,
-                Value = 8,
+                Value = 5,
                 Increment = 2,
                 HorizontalOptions = LayoutOptions.End
             };
@@ -43,7 +43,7 @@ namespace Layouts_app
             {
                 Minimum = 0,
                 Maximum = 255,
-                Value = 15,
+                Value = 0,
 
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
@@ -51,7 +51,7 @@ namespace Layouts_app
             {
                 Minimum = 0,
                 Maximum = 255,
-                Value = 15,
+                Value = 0,
 
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
@@ -59,7 +59,7 @@ namespace Layouts_app
             {
                 Minimum = 0,
                 Maximum = 255,
-                Value = 15,
+                Value = 0,
 
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
@@ -68,11 +68,12 @@ namespace Layouts_app
 
                 Minimum = 0,
                 Maximum = 255,
-                Value = 15,
+                Value = 0,
 
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 
             };
+
 
             editor1 = new Editor()
             {
@@ -83,10 +84,13 @@ namespace Layouts_app
 
             StackLayout stackLayout = new StackLayout()
             {
-                Children = { frame1, stepper1, editor1, Rslider, Gslider, Bslider  }
+                Children = { frame1, stepper1, Rslider, Gslider, Bslider  }
             };
             stackLayout.Orientation = StackOrientation.Vertical;
             Content = stackLayout;
+            Rslider.ValueChanged += OnSliderValueChanged;
+            Gslider.ValueChanged += OnSliderValueChanged;
+            Bslider.ValueChanged += OnSliderValueChanged;
             slider1.ValueChanged += Slider1_ValueChanged;
             stepper1.ValueChanged += Stepper1_ValueChanged;
 
@@ -95,7 +99,7 @@ namespace Layouts_app
 
 
         }
-        void OnSliderValueChanged(object sender,  ValueChangedEventArgs e)
+        void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
         {
             if (sender == Rslider)
             {
@@ -114,7 +118,8 @@ namespace Layouts_app
                                           (int)Bslider.Value,
                                           (int)Gslider.Value);
         }
-      
+
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
