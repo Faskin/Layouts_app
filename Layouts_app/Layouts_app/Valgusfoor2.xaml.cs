@@ -24,9 +24,9 @@ namespace Layouts_app
             {
                 Text = "punane",
                 TextColor = Color.Black,
-                FontSize=10,
-                FontAttributes=FontAttributes.Bold,
-                             
+                FontSize = 10,
+                FontAttributes = FontAttributes.Bold,
+
             };
             pun = new Frame()
             {
@@ -82,7 +82,7 @@ namespace Layouts_app
                 BackgroundColor = Color.Green,
                 FontSize = 20,
                 FontAttributes = FontAttributes.Bold,
-                
+
                 HorizontalOptions = LayoutOptions.EndAndExpand
 
 
@@ -151,8 +151,8 @@ namespace Layouts_app
                 }
             }
         }
-            
-        
+
+
 
         private async void Tap_Tapped(object sender, EventArgs e)
         {

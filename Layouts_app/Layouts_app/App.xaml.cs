@@ -10,7 +10,7 @@ namespace Layouts_app
         {
             InitializeComponent();
 
-            MainPage = new SliderStepper();
+            MainPage = new Lumememm();
         }
 
         protected override void OnStart()
