@@ -10,7 +10,7 @@ namespace Layouts_app
         {
             InitializeComponent();
 
-            MainPage = new Lumememm();
+            MainPage = new ZeroCross();
         }
 
         protected override void OnStart()

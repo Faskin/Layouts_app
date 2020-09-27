@@ -12,6 +12,7 @@ namespace Layouts_app
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Lumememm : ContentPage
     {
+        
         Frame vedro, head, body;
         public Lumememm()
         {
@@ -19,7 +20,7 @@ namespace Layouts_app
             vedro = new Frame()
             {
                 BackgroundColor = Color.Gray,
-                CornerRadius = 30,
+                CornerRadius = 180,
                 Margin = new Thickness(125, 0, 125, 0),
                 HorizontalOptions = LayoutOptions.Center
 
@@ -27,7 +28,7 @@ namespace Layouts_app
             head= new Frame()
             {
                 BackgroundColor = Color.Gray,
-                CornerRadius = 30,
+                CornerRadius = 11,
                 Margin = new Thickness(125, 50, 125, 50),
                 HorizontalOptions = LayoutOptions.Center
 

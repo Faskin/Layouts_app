@@ -12,12 +12,16 @@ namespace Layouts_app
 {
     public partial class ZeroCross : ContentPage
     {
+        Grid ground;
         bool turn;
         Label cT;
         Image boxs;
         Button resetButton;
         const int gridColumns = 3;
-
+        private const bool Zero = false;
+        private const bool Cross = true;
+        Dictionary<Image, int> ticTac;
+        Dictionary<Image, int[]> boxsPos;
         public ZeroCross()
         {
             
@@ -28,7 +32,6 @@ namespace Layouts_app
             for (int i = 0; i < gridColumns; i++)
             {
                 ground.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                ground.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
             
             for (int i = 0; i < gridColumns; i++)
@@ -38,9 +41,10 @@ namespace Layouts_app
                     boxs = new Image
                     {HeightRequest = 100, BackgroundColor = Color.FromHex("DEF7FE") };
                     ground.Children.Add(boxs, i, j);
+                    boxsPos.Add(boxs, new int[2] { i, j });
                     var tap = new TapGestureRecognizer();
-                    tap.Tapped += Tap_Tapped;
                     boxs.GestureRecognizers.Add(tap);
+                    tap.Tapped += box_Tapped;
                 }
             }
             resetButton = new Button()
@@ -71,26 +75,48 @@ namespace Layouts_app
             };
 
             Content = stackLayout;
-            cT.Text = turn ? "X Player" : "Z Player";
+            randomTurn();
             
         }
-        private void updateT()
+
+        private void box_Tapped(object sender, EventArgs e)
         {
-            if (turn = true)
+            Image boxs = sender as Image;
+            if (turn == Cross && !ticTac.ContainsKey(boxs))
             {
-                turn = false;
-                cT.Text = "X Player";
+                ticTac[boxs] = 1;
+                updateT(boxs);
 
             }
-            if (turn = false)
+            else if (turn == Zero && !ticTac.ContainsKey(boxs))
             {
-                turn = true;
-                cT.Text = "Z Player";
+                ticTac[boxs] = 2;
+                updateT(boxs);
             }
+
         }
-        private void Tap_Tapped(object sender, EventArgs e)
+
+        private void randomTurn()
         {
-            
+            Random random = new Random();
+            turn = Convert.ToBoolean(random.Next(2));
+            cT.Text = turn ? "1 Player" : "2 Player";
+        }
+        private void updateT(Image boxs )
+        {
+            if (ticTac[boxs] == 1)
+            {
+                boxs.Source = "cross.jpg";
+                turn = Cross;
+                cT.Text = "This turn: 1 Player";
+
+            }
+            else
+            {
+                boxs.Source = "zero.jpg";
+                turn = Zero;
+                cT.Text = "This turn: 2 Player";
+            }
             
         }
     }
