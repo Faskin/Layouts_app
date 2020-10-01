@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 namespace Layouts_app
 {
     public partial class ZeroCross : ContentPage
     {
-        private Grid ground;
+        readonly Grid ground;
         bool turn;
         readonly Label cT;
         Image boxs;
@@ -65,6 +68,7 @@ namespace Layouts_app
         private void ResetButton_Clicked(object sender, EventArgs e)
         {
             ResetImg();
+            
 
         }
         private void ResetImg()
@@ -72,10 +76,16 @@ namespace Layouts_app
 
             foreach (Image image in ground.Children)
             {
-                image.Source = "";
+                image.Source = null;
+                
+            }
+            ticTac = new Dictionary<Image, int>();
+            foreach (var x in ticTac.Keys)
+            {
+                ticTac[x] = 0;
             }
             RandomTurn();
-            ticTac = new Dictionary<Image, int>();
+           
 
 
         }
@@ -124,6 +134,7 @@ namespace Layouts_app
                 ticTac[Pos[0, 0]] == ticTac[Pos[2, 2]])
             {
                 return GetWinner();
+
             }
             if (Pos[0, 2].Source != null && Pos[1, 1].Source != null && Pos[2, 0].Source != null &&
                 ticTac[Pos[0, 2]] == ticTac[Pos[1, 1]] &&
@@ -152,26 +163,6 @@ namespace Layouts_app
             }
 
             return 0;
-        }
-
-        private void Box_Tapped(object sender, EventArgs e)
-        {
-            Image boxs = sender as Image;
-            if (turn == Cross && !ticTac.ContainsKey(boxs))
-            {
-                ticTac[boxs] = 1;
-                UpdateT(boxs);
-            }
-
-            else if (turn == Zero && !ticTac.ContainsKey(boxs))
-            {
-                ticTac[boxs] = 2;
-                UpdateT(boxs);
-                
-            }
-
-           
-
         }
 
 
@@ -210,6 +201,10 @@ namespace Layouts_app
             {
                 return 1;
             }
+            else if (turn == Cross)
+            {
+                return 2;
+            }
             return 2;
         }
 
@@ -232,10 +227,29 @@ namespace Layouts_app
             }
             else
             {
-                DisplayAlert("Winner", "Draw.", "OK");
-                ResetImg();
+               
+                
 
             }
+        }
+        private void Box_Tapped(object sender, EventArgs e)
+        {
+            Image boxs = sender as Image;
+            if (turn == Cross && !ticTac.ContainsKey(boxs))
+            {
+                ticTac[boxs] = 1;
+                UpdateT(boxs);
+            }
+
+            else if (turn == Zero && !ticTac.ContainsKey(boxs))
+            {
+                ticTac[boxs] = 2;
+                UpdateT(boxs);
+
+            }
+
+
+
         }
 
     }
