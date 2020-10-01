@@ -30,7 +30,7 @@ namespace Layouts_app
 
         {
             ground = StartGame();
-            ticTac = new Dictionary<Image, int>();
+            
 
             resetButton = new Button()
             {
@@ -73,6 +73,12 @@ namespace Layouts_app
 
         private void ResetButton_Clicked(object sender, EventArgs e)
         {
+            ResetImg();
+
+        }
+        private void ResetImg()
+        {
+
             foreach (Image image in ground.Children)
             {
                 image.Source = "";
@@ -82,9 +88,9 @@ namespace Layouts_app
 
 
         }
-
         private Grid StartGame()
         {
+            ticTac = new Dictionary<Image, int>();
             Grid ground = new Grid()
 
             {
@@ -116,7 +122,43 @@ namespace Layouts_app
             }
             return ground;
         }
-        
+
+        private int CheckForWin()
+        {
+            if (Pos[0, 0].Source != null &&
+                Pos[1, 1].Source != null &&
+                Pos[2, 2].Source != null &&
+                ticTac[Pos[0, 0]] == ticTac[Pos[1, 1]] &&
+                ticTac[Pos[1, 1]] == ticTac[Pos[2, 2]])
+            {
+                return GetWinner();
+            }
+            if (Pos[0, 2].Source != null && Pos[1, 1].Source != null && Pos[2, 0].Source != null &&
+                ticTac[Pos[0, 2]] == ticTac[Pos[1, 1]] &&
+                ticTac[Pos[1, 1]] == ticTac[Pos[2, 0]])
+            {
+                return GetWinner();
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (Pos[0, i].Source != null && Pos[1, i].Source != null && Pos[2, i].Source != null &&
+                    ticTac[Pos[0, i]] == ticTac[Pos[1, i]] &&
+                    ticTac[Pos[1, i]] == ticTac[Pos[2, i]])
+                {
+                    return GetWinner();
+                }
+                if (Pos[i, 0].Source != null && Pos[i, 1].Source != null && Pos[i, 2].Source != null &&
+                    ticTac[Pos[i, 0]] == ticTac[Pos[i, 1]] &&
+                    ticTac[Pos[i, 1]] == ticTac[Pos[i, 0]])
+                {
+                    return GetWinner();
+                }
+            }
+
+            return 0;
+        }
+
 
         private void Box_Tapped(object sender, EventArgs e)
         {
@@ -125,7 +167,6 @@ namespace Layouts_app
             {
                 ticTac[boxs] = 1;
                 UpdateT(boxs);
-                
             }
 
             else if (turn == Zero && !ticTac.ContainsKey(boxs))
@@ -133,8 +174,6 @@ namespace Layouts_app
                 ticTac[boxs] = 2;
                 UpdateT(boxs);
                 
-
-
             }
 
            
@@ -179,57 +218,29 @@ namespace Layouts_app
             }
             return 2;
         }
-        
-        private int CheckForWin()
-        {
-            if (Pos[0, 0].Source != null &&
-                Pos[1, 1].Source != null &&
-                Pos[2, 2].Source != null &&
-                ticTac[Pos[0, 0]] == ticTac[Pos[1, 1]] &&
-                ticTac[Pos[1, 1]] == ticTac[Pos[2, 2]])
-            {
-                return GetWinner();
-            }
-            if (Pos[0, 2].Source != null && Pos[1, 1].Source != null && Pos[2, 0].Source != null &&
-                ticTac[Pos[0, 2]] == ticTac[Pos[1, 1]] &&
-                ticTac[Pos[1, 1]] == ticTac[Pos[2, 0]])
-            {
-                return GetWinner();
-            }
 
-            for (int i = 0; i < 3; i++)
-            {
-                if (Pos[0, i].Source != null && Pos[1, i].Source != null && Pos[2, i].Source != null &&
-                    ticTac[Pos[0, i]] ==ticTac[Pos[1, i]] &&
-                    ticTac[Pos[1, i]] == ticTac[Pos[2, i]])
-                {
-                    return GetWinner();
-                }
-                if (Pos[i, 0].Source != null && Pos[i, 1].Source != null && Pos[i, 2].Source != null &&
-                    ticTac[Pos[i, 0]] == ticTac[Pos[i, 1]] &&
-                    ticTac[Pos[i, 1]] == ticTac[Pos[i, 0]])
-                {
-                    return GetWinner();
-                }
-            }
 
-            return 0;
-        }
 
-        private async void WhoWin()
+        private void WhoWin()
         {
             int win = CheckForWin();
             if (win == 1)
             {
-                await DisplayAlert("Winner", "1 Player won.", "OK");
+                DisplayAlert("Winner", "1 Player won.", "OK");
+                ResetImg();
+                
             }
             else if (win == 2)
             {
-                await DisplayAlert("Winner", "2 Player won.", "OK");
+                DisplayAlert("Winner", "2 Player won.", "OK");
+                ResetImg();
+
             }
             else
             {
-                await DisplayAlert("Winner", "Draw.", "OK");
+                DisplayAlert("Winner", "Draw.", "OK");
+                ResetImg();
+
             }
         }
 
