@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Markup;
-
 namespace Layouts_app
 {
     public partial class ZeroCross : ContentPage
     {
-        Grid ground;
+        private Grid ground;
         bool turn;
-        Label cT;
+        readonly Label cT;
         Image boxs;
-        Button resetButton;
+        readonly Button resetButton;
         const int gridColumns = 3;
         private const bool Zero = false;
         private const bool Cross = true;
@@ -129,13 +120,15 @@ namespace Layouts_app
                 Pos[1, 1].Source != null &&
                 Pos[2, 2].Source != null &&
                 ticTac[Pos[0, 0]] == ticTac[Pos[1, 1]] &&
-                ticTac[Pos[1, 1]] == ticTac[Pos[2, 2]])
+                ticTac[Pos[1, 1]] == ticTac[Pos[2, 2]] &&
+                ticTac[Pos[0, 0]] == ticTac[Pos[2, 2]])
             {
                 return GetWinner();
             }
             if (Pos[0, 2].Source != null && Pos[1, 1].Source != null && Pos[2, 0].Source != null &&
                 ticTac[Pos[0, 2]] == ticTac[Pos[1, 1]] &&
-                ticTac[Pos[1, 1]] == ticTac[Pos[2, 0]])
+                ticTac[Pos[1, 1]] == ticTac[Pos[2, 0]] &&
+                ticTac[Pos[0, 2]] == ticTac[Pos[2, 0]])
             {
                 return GetWinner();
             }
@@ -144,13 +137,15 @@ namespace Layouts_app
             {
                 if (Pos[0, i].Source != null && Pos[1, i].Source != null && Pos[2, i].Source != null &&
                     ticTac[Pos[0, i]] == ticTac[Pos[1, i]] &&
-                    ticTac[Pos[1, i]] == ticTac[Pos[2, i]])
+                    ticTac[Pos[1, i]] == ticTac[Pos[2, i]] &&
+                    ticTac[Pos[0, i]] == ticTac[Pos[2, i]])
                 {
                     return GetWinner();
                 }
                 if (Pos[i, 0].Source != null && Pos[i, 1].Source != null && Pos[i, 2].Source != null &&
                     ticTac[Pos[i, 0]] == ticTac[Pos[i, 1]] &&
-                    ticTac[Pos[i, 1]] == ticTac[Pos[i, 0]])
+                    ticTac[Pos[i, 1]] == ticTac[Pos[i, 2]] &&
+                    ticTac[Pos[i, 0]] == ticTac[Pos[i, 2]])
                 {
                     return GetWinner();
                 }
@@ -158,7 +153,6 @@ namespace Layouts_app
 
             return 0;
         }
-
 
         private void Box_Tapped(object sender, EventArgs e)
         {
